@@ -1,12 +1,13 @@
 import React from 'react'
 import SideBar from '../../components/SideBar'
-import Registeration from '../Registeration'
+import Registration from '../Registration'
 import Booking from '../Booking'
 import Billing from '../Billing'
 import Complain from '../Complain';
-import CarRegisteration from '../CarRegisteration'
+import CarRegistration from '../CarRegistration'
+import CompareImage from '../CompareImage'
 import ShowDriverReg from '../ShowDriverReg'
-import Showcardetails from '../Showcardetails'
+import ShowVehicleDetails from '../ShowVehicleDetails'
 import { Route, Switch } from 'react-router'
 
 export default function Home() {
@@ -34,14 +35,15 @@ export default function Home() {
             </div>
             <div>
                 <Switch>
-                    <Route exact path="/home/Registeration" component={Registeration} />
+                    <Route exact path="/home/Registration" component={Registration} />
                     <Route exact path="/home/ShowDriverReg" component={ShowDriverReg} />
-                    <Route exact path="/home/CarRegisteration" component={CarRegisteration} />
-                    <Route exact path="/home/Showcardetails" component={Showcardetails} />
+                    <Route exact path="/home/CarRegistration" component={CarRegistration} />
+                    <Route exact path="/home/ShowVehicleDetails" component={ShowVehicleDetails} />
                     <Route exact path="/home/Booking" component={Booking} />
                     <Route exact path="/home/Billing" component={Billing} />
                     <Route exact path="/home/Complain" component={Complain} />
-                    {<Route path="*" component={Registeration} />}
+                    <Route exact path="/home/CompareImage" component={CompareImage} />
+                    {<Route path="*" component={Registration} />}
                 </Switch>
             </div>
         </>

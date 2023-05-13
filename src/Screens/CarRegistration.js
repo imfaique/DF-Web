@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function CarRegisteration() {
+export default function CarRegistration() {
 
     const classes = useStyles();
 
@@ -466,7 +466,7 @@ export default function CarRegisteration() {
             return;
         }
         else {
-            console.log("bhag bsdk")
+            console.log("no")
             // const base64s = [];
             // // console.log(base64s)
             for (var i = 0; i < files.length; i++) {
@@ -586,7 +586,7 @@ export default function CarRegisteration() {
             )
             console.log(name);
             if (data !== null) {
-                toast('Car Registered Successfully 😃')
+                toast('Vehicle Registered Successfully 😃')
                 setName('')
                 setCnicNo('')
                 setContactNo('')
@@ -618,7 +618,7 @@ export default function CarRegisteration() {
             <div className="paperL">
                 <Paper elevation={10}>
 
-                    <h1 className='headingh1'>Car Registeration Form</h1>
+                    <h1 className='headingh1'>Vehicle Registration Form</h1>
                     <form className={classes.form}>
                         <div className='r'>
                             <div className={classes.formgroup}>
@@ -878,7 +878,7 @@ export default function CarRegisteration() {
 
                         {/* <ImageUploader/> */}
 
-
+                        {/* 
                         <label className="imageL">Your Image File <br />
                             <input
                                 type="file"
@@ -889,7 +889,7 @@ export default function CarRegisteration() {
                                 onChange={uploadImage}
                                 className="imgaeText" />
 
-                        </label>
+                        </label> */}
 
 
                         <button className="btn mt-4 paperB" onClick={handleSubmit} type='submit'>Register</button>

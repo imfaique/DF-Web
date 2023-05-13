@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function Registeration() {
+export default function Registration() {
 
     const classes = useStyles();
 
@@ -296,7 +296,7 @@ export default function Registeration() {
 
             <Paper elevation={10}>
 
-                <h1 className='headingh1' >Driver Registeration Form</h1>
+                <h1 className='headingh1' >Driver Registration Form</h1>
                 <form className={classes.form}>
                     <div className='r'>
                         <div className={classes.formgroup}>

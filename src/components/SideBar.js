@@ -11,6 +11,10 @@ import EventAvailableOutlinedIcon from '@material-ui/icons/EventAvailableOutline
 import ReceiptOutlinedIcon from '@material-ui/icons/ReceiptOutlined';
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import DirectionsCarOutlinedIcon from '@mui/icons-material/DirectionsCarOutlined';
+import PsychologyAltIcon from '@mui/icons-material/PsychologyAlt';
+import CompareIcon from '@mui/icons-material/Compare';
+import CarRentalIcon from '@mui/icons-material/CarRental';
+import AirlineSeatReclineNormalIcon from '@mui/icons-material/AirlineSeatReclineNormal';
 import { useHistory } from 'react-router';
 
 
@@ -164,28 +168,28 @@ const SideBar = (props) => {
                             handleListItemClick(event, 1)
                             history.push('/home/ShowDriverReg')
                         }} className={classes.items}>
-                        <ListItemIcon><AddCircleOutlineOutlinedIcon style={{ fontSize: 30 }} /></ListItemIcon>
-                        <ListItemText primary='ShowDriverRegisteration' />
+                        <ListItemIcon><AirlineSeatReclineNormalIcon style={{ fontSize: 30 }} /></ListItemIcon>
+                        <ListItemText primary='Driver Details' />
                     </ListItem>
 
                     <ListItem button
                         selected={selectedIndex === 2}
                         onClick={(event) => {
                             handleListItemClick(event, 2)
-                            history.push('/home/CarRegisteration')
+                            history.push('/home/CarRegistration')
                         }} className={classes.items}>
                         <ListItemIcon><DirectionsCarOutlinedIcon style={{ fontSize: 30 }} /></ListItemIcon>
-                        <ListItemText primary='CarRegistration' />
+                        <ListItemText primary='Vehicle Registration' />
                     </ListItem>
 
                     <ListItem button
                         selected={selectedIndex === 3}
                         onClick={(event) => {
                             handleListItemClick(event, 3)
-                            history.push('/home/Showcardetails')
+                            history.push('/home/ShowVehicleDetails')
                         }} className={classes.items}>
-                        <ListItemIcon><DirectionsCarOutlinedIcon style={{ fontSize: 30 }} /></ListItemIcon>
-                        <ListItemText primary='ShowCarDetails' />
+                        <ListItemIcon><CarRentalIcon style={{ fontSize: 30 }} /></ListItemIcon>
+                        <ListItemText primary='Vehicle Details' />
                     </ListItem>
 
                     <ListItem button
@@ -214,8 +218,18 @@ const SideBar = (props) => {
                             handleListItemClick(event, 6)
                             history.push('/home/Complain')
                         }} className={classes.items} >
-                        <ListItemIcon><ReceiptOutlinedIcon style={{ fontSize: 30 }} /></ListItemIcon>
+                        <ListItemIcon><PsychologyAltIcon style={{ fontSize: 30 }} /></ListItemIcon>
                         <ListItemText primary='Complain' />
+                    </ListItem>
+
+                    <ListItem button
+                        selected={selectedIndex === 7}
+                        onClick={(event) => {
+                            handleListItemClick(event, 7)
+                            history.push('/home/CompareImage')
+                        }} className={classes.items} >
+                        <ListItemIcon><CompareIcon style={{ fontSize: 30 }} /></ListItemIcon>
+                        <ListItemText primary='CompareImage' />
                     </ListItem>
 
                 </List>
