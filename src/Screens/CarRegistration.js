@@ -12,6 +12,8 @@ import Select from '@mui/material/Select';
 import MaskedInput from 'react-text-mask'
 import ImageUploader from '../components/ImageUploader'
 import FileBase64 from 'react-file-base64'
+import Dropzone from "react-dropzone";
+
 
 
 
@@ -114,33 +116,64 @@ export default function CarRegistration() {
 
     // const [image, setImage] = useState([])
     // const [category, setCategory] = useState('Body Parts')
+    const [selectedFile, setSelectedFile] = useState(null);
+    const handleFileSelect = (acceptedFiles) => {
+        const file = acceptedFiles[0];
+        setSelectedFile(file);
+    };
 
-
-    function uploadSingleImage(base64) {
-        setLoading(true);
-
-        axios
-            .post("http://localhost:5000/uploadImage", { image: base64 })
-            .then((res) => {
-                setUrl(res.data);
-                alert("Image Uploaded Successfully");
-            })
-            .then(() => setLoading(false))
-            .catch(console.log);
+    const handleChange = (e) => {
+        console.log(e.target.files)
+        setImage(e.target.files[0])
     }
 
-    function uploadMultipleImages(images) {
-        // setLoading(true);
+    const handleUpload = () => {
+        if (selectedFile) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const base64Data = reader.result.split(',')[1];
+                uploadImage(base64Data);
+            };
+            reader.readAsDataURL(selectedFile);
+        }
+    };
 
+    const uploadImage = (base64Data) => {
         axios
-            .post("http://localhost:5000/uploadMultipleImages", { images })
-            .then((res) => {
-                setUrl(res.data);
-                alert("Image Uploaded Successfully");
+            .post('/upload', { image: base64Data })
+            .then((response) => {
+                console.log('Image uploaded successfully');
             })
-            .then(() => setLoading(false))
-            .catch(console.log);
-    }
+            .catch((error) => {
+                console.error('Failed to upload image:', error);
+            });
+    };
+
+    // function uploadSingleImage(base64) {
+    //     setLoading(true);
+
+    //     axios
+    //         .post("http://localhost:5000/uploadImage", { image: base64 })
+    //         .then((res) => {
+    //             setUrl(res.data);
+    //             alert("Image Uploaded Successfully");
+    //         })
+    //         .then(() => setLoading(false))
+    //         .catch(console.log);
+    // }
+
+    // function uploadMultipleImages(images) {
+    //     // setLoading(true);
+
+    //     axios
+    //         .post("http://localhost:5000/uploadMultipleImages", { images })
+    //         .then((res) => {
+    //             setUrl(res.data);
+    //             alert("Image Uploaded Successfully");
+    //         })
+    //         .then(() => setLoading(false))
+    //         .catch(console.log);
+    // }
 
 
 
@@ -457,34 +490,35 @@ export default function CarRegistration() {
         }
     }
 
-    const uploadImage = (event) => {
-        const files = event.target.files;
-        if (files.length === 1) {
-            console.log('files:', files)
-            const base64 = FileBase64(files);
-            uploadSingleImage(base64);
-            return;
-        }
-        else {
-            console.log("no")
-            // const base64s = [];
-            // // console.log(base64s)
-            for (var i = 0; i < files.length; i++) {
-                // console.log(files.length)
-                // var base = FileBase64(files[i]);
-                setImage(files[i]);
-                // console.log(i)
-            }
+    // const uploadImage = (event) => {
+    //     const files = event.target.files;
+    //     if (files.length === 1) {
+    //         console.log('files:', files)
+    //         const base64 = FileBase64(files);
+    //         uploadSingleImage(base64);
+    //         return;
+    //     }
+    //     else {
+    //         console.log("no")
+    //         // const base64s = [];
+    //         // // console.log(base64s)
+    //         for (var i = 0; i < files.length; i++) {
+    //             // console.log(files.length)
+    //             // var base = FileBase64(files[i]);
+    //             setImage(files[i]);
+    //             // console.log(i)
+    //         }
 
-            // setImage(base64s)
-            console.log("IMAGES", images)
-        }
-    };
+    //         // setImage(base64s)
+    //         console.log("IMAGES", images)
+    //     }
+    // };
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         console.log(vehicleType)
         console.log(companyName)
+        console.log('images', images)
         if (name === '') {
             setNameError('Name Required')
             // console.log("EMPTY");
@@ -878,8 +912,8 @@ export default function CarRegistration() {
 
                         {/* <ImageUploader/> */}
 
-                        {/* 
-                        <label className="imageL">Your Image File <br />
+
+                        {/* <label className="imageL">Your Image File <br />
                             <input
                                 type="file"
                                 name="myImage"
@@ -892,6 +926,53 @@ export default function CarRegistration() {
                         </label> */}
 
 
+                        <div>
+                            <label className="imageL" > <br /><br />
+                                <input
+                                    type="file"
+                                    onChange={handleChange}
+                                    multiple
+                                    // value={image}
+                                    className="imgaeText" />
+                            </label>
+                        </div>
+
+
+                        {/* <div className="paperR">
+                            <Paper elevation={10}>
+                                <div>
+
+                                    {
+                                        Array.from(images).map(item => {
+                                            return (
+                                                <span>
+                                                    <img
+                                                        style={{ padding: '10px' }}
+                                                        width={150} height={100}
+                                                        src={item ? URL.createObjectURL(item) : null} />
+                                                </span>
+                                            )
+                                        })
+                                    }
+
+                                    <center>
+
+                                        <input
+                                            className="btn"
+                                            onChange={(e) => {
+                                                setImage(e.target.files)
+                                            }}
+                                            multiple
+                                            type="file"
+                                        />
+                                    </center>
+
+
+                                </div>
+                            </Paper>
+                        </div> */}
+
+
                         <button className="btn mt-4 paperB" onClick={handleSubmit} type='submit'>Register</button>
                     </form>
 
@@ -902,44 +983,6 @@ export default function CarRegistration() {
 
 
             </div>
-            {/* 
-            <div className="paperR">
-                <Paper elevation={10}>
-                    <h1>Hello</h1>
-                    <div>
-
-                        {
-                            Array.from(image).map(item => {
-                                return (
-                                    <span>
-                                        <img
-                                            style={{ padding: '10px' }}
-                                            width={150} height={100}
-                                            src={item ? URL.createObjectURL(item) : null} />
-                                    </span>
-                                )
-                            })
-                        }
-
-                        <center>
-
-                            <input
-                                className="btn"
-                                onChange={(e) => {
-                                    setImage(e.target.files)
-                                }}
-                                multiple
-                                type="file"
-                            />
-                        </center>
-                       
-
-                    </div>
-                </Paper>
-            </div>
- */}
-
-
         </div>
     );
 }
